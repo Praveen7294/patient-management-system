@@ -11,13 +11,13 @@ import java.util.List;
 @Service
 public class PatientService {
 
-    public PatientRepository patientRepository;
+    public final PatientRepository patientRepository;
 
     public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
 
-    public List<PatientResponseDTO> getPatient() {
+    public List<PatientResponseDTO> getPatients() {
         List<Patient> patients = patientRepository.findAll();
 
         return patients.stream().map(PatientMapper::toDTO).toList();
