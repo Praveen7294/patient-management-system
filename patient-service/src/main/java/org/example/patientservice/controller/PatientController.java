@@ -41,7 +41,7 @@ public class PatientController {
     //localhost:4000/patients/4646465464-465465465-646545464
     @PutMapping("/{id}")
     public ResponseEntity<PatientResponseDTO> updatePatient(
-            @PathVariable UUID id, @RequestBody PatientRequestDTO patientRequestDTO) {
+            @PathVariable UUID id, @Validated({Default.class}) @RequestBody PatientRequestDTO patientRequestDTO) {
 
         PatientResponseDTO patientResponseDTO = patientService.updatePatient(id, patientRequestDTO);
 
