@@ -3,7 +3,6 @@ package org.example.patientservice.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.example.patientservice.EmailAlreadyExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +32,15 @@ public class GlobalExceptionHandler {
         log.warn("Email address already exists {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         errors.put("message", "Email address already exists");
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handlePatientNotFoundException(PatientNotFoundException ex) {
+
+        log.warn("Patient not found {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Patient not found");
         return ResponseEntity.badRequest().body(errors);
     }
 }
