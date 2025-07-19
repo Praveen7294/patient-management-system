@@ -5,7 +5,6 @@ import org.example.patientservice.dto.PatientResponseDTO;
 import org.example.patientservice.model.Patient;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class PatientMapper {
 
