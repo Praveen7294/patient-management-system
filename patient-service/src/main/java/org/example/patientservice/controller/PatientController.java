@@ -1,6 +1,5 @@
 package org.example.patientservice.controller;
 
-import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import org.example.patientservice.dto.PatientRequestDTO;
 import org.example.patientservice.dto.PatientResponseDTO;
