@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import patient.BillingRequest;
-import patient.BillingResponse;
-import patient.BillingServiceGrpc;
-import patient.BillingServiceGrpc.BillingServiceBlockingStub;
+import billing.BillingRequest;
+import billing.BillingResponse;
+import billing.BillingServiceGrpc;
+import billing.BillingServiceGrpc.BillingServiceBlockingStub;
 
 @Service
 public class BillingServiceGrpcClient {
