@@ -19,7 +19,7 @@ import java.util.UUID;
 @Tag(name = "Patient", description = "API for managing Patients")
 public class PatientController {
 
-    public final PatientService patientService;
+    private final PatientService patientService;
 
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
