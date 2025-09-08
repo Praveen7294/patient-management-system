@@ -3,8 +3,8 @@ POST http://localhost:4000/patients
 Content-Type: application/json
 
 {
-  "name": "Ankit Kumar",
-  "email": "ankit123@gamil.com",
+  "name": "Kafka Test 1",
+  "email": "kafkatest1@gamil.com",
   "address": "591 New York",
   "dateOfBirth": "2002-04-22",
   "registeredDate": "2025-07-05"
