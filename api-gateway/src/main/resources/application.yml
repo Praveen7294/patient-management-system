@@ -10,7 +10,7 @@ spring:
             ## REST CLIENT -> http://localhost:4004/api/patients
             ## API GATEWAY -> http://patient-service:4000/patients
             ## PATIENT SERVICE (SPRING BOOT APP) -> /patients -> Patients array
-            - id: patient-service-routes
+            - id: patient-service-route
               uri: http://patient-service:4000
               predicates:
                 - Path=/api/patients/**
@@ -26,3 +26,12 @@ spring:
                 - Path=/api-docs/patients
               filters:
                 - RewritePath=/api-docs/patients,/v3/api-docs
+
+            ## REST CLIENT -> http://localhost:4004/auth/login
+            ## API GATEWAY -> http://auth-service:4005/login
+            - id: auth-service-route
+              uri: http://auth-service:4005
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
