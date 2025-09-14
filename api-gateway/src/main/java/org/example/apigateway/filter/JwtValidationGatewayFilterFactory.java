@@ -22,7 +22,7 @@ public class JwtValidationGatewayFilterFactory extends
     @Override
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
-            String token = exchange.getResponse().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
             if (token == null || !token.startsWith("Bearer ")) {
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
