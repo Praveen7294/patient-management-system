@@ -642,6 +642,26 @@
      "Type": "TCP"
     }
    }
+  },
+  "MskCluster": {
+   "Type": "AWS::MSK::Cluster",
+   "Properties": {
+    "BrokerNodeGroupInfo": {
+     "BrokerAZDistribution": "DEFAULT",
+     "ClientSubnets": [
+      {
+       "Ref": "PatientManagementVpcPrivateSubnet1SubnetBDF7E702"
+      },
+      {
+       "Ref": "PatientManagementVpcPrivateSubnet2Subnet58F4C9B9"
+      }
+     ],
+     "InstanceType": "kafka.m5.xlarge"
+    },
+    "ClusterName": "kafka-cluster",
+    "KafkaVersion": "2.8.0",
+    "NumberOfBrokerNodes": 1
+   }
   }
  }
 }
