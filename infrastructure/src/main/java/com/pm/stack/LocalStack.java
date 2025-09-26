@@ -15,6 +15,8 @@ import software.amazon.awscdk.services.rds.PostgresEngineVersion;
 import software.amazon.awscdk.services.rds.DatabaseInstanceEngine;
 import software.amazon.awscdk.services.rds.PostgresInstanceEngineProps;
 import software.amazon.awscdk.services.rds.Credentials;
+import software.amazon.awscdk.services.route53.CfnHealthCheck;
+import software.amazon.awscdk.Token;
 
 public class LocalStack extends Stack {
 
@@ -29,6 +31,12 @@ public class LocalStack extends Stack {
                 createDatabase("AuthServiceDB", "auth-service-db");
         DatabaseInstance patientServiceDb =
                 createDatabase("PatientServiceDB", "patient-service-db");
+
+        CfnHealthCheck authDbHealthCheck =
+                createDbHealthCheck(authServiceDb, "AuthServiceDbHealthCheck");
+
+        CfnHealthCheck patientDbHealthCheck =
+                createDbHealthCheck(patientServiceDb, "PatientServiceDbHealthCheck");
     }
 
     private Vpc createVpc() {
@@ -51,6 +59,19 @@ public class LocalStack extends Stack {
                 .credentials(Credentials.fromGeneratedSecret("admin_user"))
                 .databaseName(dbName)
                 .removalPolicy(RemovalPolicy.DESTROY)
+                .build();
+    }
+
+    private CfnHealthCheck createDbHealthCheck(DatabaseInstance db, String id) {
+        return CfnHealthCheck.Builder
+                .create(this, id)
+                .healthCheckConfig(CfnHealthCheck.HealthCheckConfigProperty.builder()
+                        .type("TCP")
+                        .port(Token.asNumber(db.getDbInstanceEndpointPort()))
+                        .ipAddress(db.getDbInstanceEndpointAddress())
+                        .requestInterval(30)
+                        .failureThreshold(3)
+                        .build())
                 .build();
     }
 
